@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./images/logo.ico" />
+    <title>My CV APP</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/customSweetalert2.css" />
+    <link rel="stylesheet" href="./css/logo.css" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-front">
+        <div class="avatar">
+          <img src="#" alt="" id="imgPreview" />
+          <label for="avatar-image"><i class="bi bi-camera-fill"></i></label>
+          <input type="file" id="avatar-image" accept="image/png, image/jpeg" hidden />
+        </div>
+        <div class="menu">
+          <div class="reset" title="Khôi phục data và giao diện">
+            <i class="bi bi-arrow-clockwise"></i>
+          </div>
+          <div class="edit-content" title="Chỉnh sửa thông tin cá nhân"><i class="bi bi-pencil"></i></div>
+          <div class="like" title="Like nếu bạn thích!">
+            <i class="bi bi-heart"></i><span class="like-count"></span>
+          </div>
+          <div class="print" title="Print CV"><i class="bi bi-printer"></i></div>
+          <div class="download" title="Tải xuống file PDF"><i class="bi bi-filetype-pdf"></i></div>
+        </div>
+        <div class="name" id="name-show">Nguyễn Văn Quý</div>
+        <div class="contact">
+          <div class="item">
+            <div class="item-icon"><i class="bi bi-envelope"></i></div>
+            <div class="item-name">Email:</div>
+            <a class="item-desc" id="email-show" href="mailto: q5nguyenn@gmail.com">q5nguyenn@gmail.com</a>
+          </div>
+          <div class="item">
+            <div class="item-icon"><i class="bi bi-phone"></i></div>
+            <div class="item-name">Điện thoại:</div>
+            <div class="item-desc" id="phone_number-show">0986295956</div>
+          </div>
+          <div class="item">
+            <div class="item-icon"><i class="bi bi-people"></i></div>
+            <div class="item-name">Giới tính:</div>
+            <div class="item-desc" id="gender-show">Nam</div>
+          </div>
+          <div class="item">
+            <div class="item-icon"><i class="bi bi-calendar-date"></i></div>
+            <div class="item-name">Ngày sinh:</div>
+            <div class="item-desc" id="birthday-show">26/02/1993</div>
+          </div>
+          <div class="item">
+            <div class="item-icon"><i class="bi bi-geo"></i></div>
+            <div class="item-name">Địa chỉ:</div>
+            <div class="item-desc" id="address-show">Thái Hoà, Thái Thuỵ, Thái Bình</div>
+          </div>
+          <div class="item item-target">
+            <div class="item-icon"><i class="bi bi-bullseye"></i></div>
+            <div class="item-name">Mục tiêu nghề nghiệp:</div>
+            <div class="item-desc" id="target-show">Đó là mục tiêu của tôi, tất cả những gì tôi muốn</div>
+          </div>
+        </div>
+      </div>
+      <div class="page-left">
+        <div class="page-bg1"></div>
+        <div class="page-bg2"></div>
+      </div>
+      <div class="page-right"></div>
+      <div class="page-menu">
+        <label class="item-icon choose-color primary-color" for="primary-color">
+          <input
+            type="color"
+            id="primary-color"
+            name="primary-color"
+            value="#ff0000"
+            style="visibility: hidden; width: 0px"
+          />
+        </label>
+        <label class="item-icon choose-color secondary-color" for="secondary-color">
+          <input
+            type="color"
+            id="secondary-color"
+            name="secondary-color"
+            value="#ff0000"
+            style="visibility: hidden; width: 0px"
+          />
+        </label>
+        <div class="item-icon" style="cursor: pointer" id="add-topic"><i class="bi bi-file-earmark-plus"></i></div>
+      </div>
+    </div>
+    <!-- Popup -->
+    <!-- Popup profile -->
+    <div class="popup">
+      <form class="edit-info" id="form-info">
+        <div class="edit-info-title"></div>
+        <div class="input-horizontal">
+          <label for="name">Họ và tên: </label>
+          <input type="text" id="name" />
+        </div>
+        <div class="input-horizontal">
+          <label for="email">Email: </label>
+          <input type="text" id="email" />
+        </div>
+        <div class="input-horizontal">
+          <label for="phone">Điện thoại: </label>
+          <input type="text" id="phone_number" />
+        </div>
+        <div class="input-horizontal">
+          <label for="birth">Ngày sinh: </label>
+          <input type="date" id="birthday" />
+        </div>
+        <div class="input-horizontal">
+          <label for="gender">Giới tính: </label>
+          <input type="text" id="gender" />
+        </div>
+        <div class="input-horizontal">
+          <label for="address">Địa chỉ: </label>
+          <input type="text" id="address" />
+        </div>
+        <div class="input-horizontal">
+          <label for="target">Mục tiêu nghề nghiệp: </label>
+          <textarea name="" id="target" cols="30" rows="10"></textarea>
+        </div>
+        <div class="btn">
+          <button type="submit">Update</button>
+        </div>
+        <div class="icon-exit">
+          <i class="bi bi-x-lg"></i>
+        </div>
+      </form>
+    </div>
+    <!-- Popup topic -->
+    <div class="popup">
+      <form action="" class="handle-topic" id="handle-topic" data-param="1" data-id="0">
+        <div class="input-vertical">
+          <label for="title">Tên topic: </label>
+          <input type="text" id="title" />
+        </div>
+        <div class="btn">
+          <button type="submit">Save</button>
+        </div>
+        <div class="icon-exit">
+          <i class="bi bi-x-lg"></i>
+        </div>
+      </form>
+    </div>
+
+    <!-- Popup child topic -->
+    <div class="popup">
+      <form action="" class="handle-topic-child" id="handle-topic-child">
+        <div class="input-vertical">
+          <label for="company">Tên topic: </label>
+          <input type="text" id="company" />
+        </div>
+        <div class="input-vertical">
+          <label for="role">Chức vụ: </label>
+          <input type="text" id="role" />
+        </div>
+        <div class="input-vertical">
+          <label for="role">Miêu tả: </label>
+          <textarea name="" id="description" rows="9" style="width: 100%"></textarea>
+        </div>
+        <div style="display: flex">
+          <div class="input-horizontal" style="width: 50%">
+            <label for="">From</label>
+            <input type="date" id="from" />
+          </div>
+          <div class="input-horizontal" style="width: 50%">
+            <label for="">To</label>
+            <input type="date" id="to" />
+          </div>
+        </div>
+        <div class="btn">
+          <button type="submit">Save</button>
+        </div>
+        <div class="icon-exit">
+          <i class="bi bi-x-lg"></i>
+        </div>
+      </form>
+    </div>
+    <div class="popup-backdrop" style="display: none"></div>
+    <div class="logo-fixed">
+      <a href="https://q5nguyenn.github.io/" class="logo-brand" target="_blank">
+        <img src="./images/q.png" alt="" class="img-square" />
+      </a>
+    </div>
+    <div class="page-guide"></div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/data.js"></script>
+  <!-- <script type="module" src="./js/ultility.js"></script> -->
+</html>
