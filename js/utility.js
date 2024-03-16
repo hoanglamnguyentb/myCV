@@ -22,10 +22,10 @@ function formatDate(dateString, format = 'simple') {
   }
   let [year, month, day] = dateString.split('-');
   if (format == 'simple') {
-    let formattedDate = `${month}/${year}`;
+    let formattedDate = `${year}`;
     return formattedDate;
   } else {
-    let formattedDate = `${day}/${month}/${year}`;
+    let formattedDate = `${month}/${year}`;
     return formattedDate;
   }
 }

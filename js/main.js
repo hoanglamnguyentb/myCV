@@ -1,5 +1,5 @@
 import { getItem, setItem, generateNewId, formatDate, pageReload, debounce, replace, replaceChild } from './utility.js';
-import { user_reset, likes_reset, topics_reset, topic_childs_reset, colors_reset } from './data.js';
+import { user_reset, likes_reset, topics_reset, topic_childs_reset, colors_reset, resetData } from './data.js';
 
 $(document).ready(function () {
   showTopics();
@@ -53,6 +53,12 @@ $(document).ready(function () {
       300
     );
     $('.handle-topic-child').animate(
+      {
+        top: '-1000px',
+      },
+      300
+    );
+    $('.handle-category').animate(
       {
         top: '-1000px',
       },
@@ -166,11 +172,13 @@ $(document).ready(function () {
   });
   //2.2 Sửa topic
   //2.2.1 Show popup
-  $('.page-right').on('click', '.topic-child', function () {
-    handle = 'edit';
-    id = $(this).data('id');
-    parent_id = $(this).data('parent');
-    showFormHandleTopicChild(id);
+  $('.page-right').on('click', '.topic-child', function (e) {
+    if (!$(this).hasClass('category-edit')) {
+      handle = 'edit';
+      id = $(this).data('id');
+      parent_id = $(this).data('parent');
+      showFormHandleTopicChild(id);
+    }
   });
 
   //2.2.1 Xử lý
@@ -382,7 +390,7 @@ $(document).ready(function () {
 												${htmlChild}
 											</div>`;
     });
-    $('.page-right').html(htmlResult);
+    $('#data').html(htmlResult);
   }
 
   // User
@@ -394,7 +402,7 @@ $(document).ready(function () {
     $('#name').val(user['name']);
     $('#email').val(user['email']);
     $('#phone_number').val(user['phone_number']);
-    $('#gender').val(user['gender']);
+    $('#interests').val(user['interests']);
     $('#birthday').val(user['birthday']);
     $('#address').val(user['address']);
     $('#target').val(user['target']);
@@ -413,7 +421,7 @@ $(document).ready(function () {
     let name = $('#name').val();
     let email = $('#email').val();
     let phone_number = $('#phone_number').val();
-    let gender = $('#gender').val();
+    let interests = $('#interests').val();
     let birthday = $('#birthday').val();
     let address = $('#address').val();
     let target = $('#target').val();
@@ -422,7 +430,7 @@ $(document).ready(function () {
       avatar: user.avatar,
       email: email,
       phone_number: phone_number,
-      gender: gender,
+      interests: interests,
       birthday: birthday,
       address: address,
       target: target,
@@ -436,8 +444,11 @@ $(document).ready(function () {
     let birthday = formatDate(user['birthday'], 'full');
     $('#name-show').html(user['name']);
     $('#email-show').html(user['email']);
+    $('#first-name-show').html(user['first_name']);
+    $('#last-name-show').html(user['last_name']);
+    $('#job-title-show').html(user['job_title']);
     $('#phone_number-show').html(user['phone_number']);
-    $('#gender-show').html(user['gender']);
+    $('#interests-show').html(user['interests']);
     $('#birthday-show').html(birthday);
     $('#address-show').html(user['address']);
     $('#target-show').html(user['target']);
@@ -449,12 +460,7 @@ $(document).ready(function () {
   // Reset data
   $('.reset').click(function (e) {
     e.preventDefault();
-    setItem('user', user_reset);
-    setItem('likes', likes_reset);
-    setItem('topics', topics_reset);
-    setItem('topic_childs', topic_childs_reset);
-    setItem('colors', colors_reset);
-    location.reload();
+    resetData();
   });
   //Like
   $('.like').click(function (e) {
@@ -497,8 +503,8 @@ $(document).ready(function () {
 
   //Dowload
   $('.download').click(function (e) {
-    const pdfURL = './images/my-cv.pdf';
-    const link = $('<a>').attr('href', pdfURL).attr('download', 'my-cv.pdf');
+    const pdfURL = './images/Professional CV Resume.pdf';
+    const link = $('<a>').attr('href', pdfURL).attr('download', 'Professional CV Resume.pdf');
     $('body').append(link);
     link[0].click();
     link.remove();
@@ -561,14 +567,21 @@ $(document).ready(function () {
     }, 300)
   );
 
-  $('.topic-child').hover(
-    debounce(function () {
-      $(this).find('.topic-menu').fadeIn(300);
-    }, 300),
-    debounce(function () {
-      $(this).find('.topic-menu').fadeOut(300);
-    }, 300)
-  );
+  $('.page-right')
+    .on(
+      'mouseenter',
+      '.topic-child, .category',
+      debounce(function () {
+        $(this).find('.topic-menu').fadeIn(300);
+      }, 300)
+    )
+    .on(
+      'mouseleave',
+      '.topic-child, .category',
+      debounce(function () {
+        $(this).find('.topic-menu').fadeOut(300);
+      }, 300)
+    );
 
   // Đổi vị trí
   $('.page-right').on('click', '.topic-up', function (e) {

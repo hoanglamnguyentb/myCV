@@ -1,3 +1,8 @@
+:root {
+  --bg-color1: #27384c;
+  --bg-color2: #999;
+}
+
 .menu {
   display: none;
 }
@@ -16,12 +21,12 @@
   }
 
   .page-front {
-    height: 90%;
+    /* height: 90%;
     background-color: #fff;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    overflow: hidden;
+    overflow: hidden; */
   }
 
   html,
@@ -31,4 +36,19 @@
     padding: 0 !important;
     overflow: hidden;
   }
+
+  /* Fix */
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+@page {
+  size: a4;
+  margin: 0;
+}
+
+@media print {
+  page-break-inside: avoid;
 }

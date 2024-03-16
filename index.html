@@ -5,14 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="./images/logo.ico" />
-    <title>My CV APP</title>
+    <title>MyCV</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/customSweetalert2.css" />
     <link rel="stylesheet" href="./css/logo.css" />
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
   </head>
   <body>
-    <div class="page">
+    <button id="download-button">Download as PDF</button>
+    <div class="page" id="print-area">
       <div class="page-front">
+        <div class="page-left">
+          <div class="page-bg1"></div>
+        </div>
         <div class="avatar">
           <img src="#" alt="" id="imgPreview" />
           <label for="avatar-image"><i class="bi bi-camera-fill"></i></label>
@@ -29,45 +34,52 @@
           <div class="print" title="Print CV"><i class="bi bi-printer"></i></div>
           <div class="download" title="Tải xuống file PDF"><i class="bi bi-filetype-pdf"></i></div>
         </div>
-        <div class="name" id="name-show">Nguyễn Văn Quý</div>
+        <!-- <div class="about" id="name-show">About me</div> -->
+        <h3 class="text-center">About me</h3>
+        <p id="interests-show"></p>
         <div class="contact">
           <div class="item">
             <div class="item-icon"><i class="bi bi-envelope"></i></div>
-            <div class="item-name">Email:</div>
-            <a class="item-desc" id="email-show" href="mailto: q5nguyenn@gmail.com">q5nguyenn@gmail.com</a>
+            <a class="item-desc" id="email-show" href="mailto: hoanglamnguyentb@gmail.com"
+              >hoanglamnguyentb@gmail.com</a
+            >
           </div>
           <div class="item">
             <div class="item-icon"><i class="bi bi-phone"></i></div>
-            <div class="item-name">Điện thoại:</div>
             <div class="item-desc" id="phone_number-show">0986295956</div>
           </div>
           <div class="item">
-            <div class="item-icon"><i class="bi bi-people"></i></div>
-            <div class="item-name">Giới tính:</div>
-            <div class="item-desc" id="gender-show">Nam</div>
-          </div>
-          <div class="item">
             <div class="item-icon"><i class="bi bi-calendar-date"></i></div>
-            <div class="item-name">Ngày sinh:</div>
-            <div class="item-desc" id="birthday-show">26/02/1993</div>
+            <div class="item-desc" id="birthday-show">16/05/2003</div>
           </div>
           <div class="item">
             <div class="item-icon"><i class="bi bi-geo"></i></div>
-            <div class="item-name">Địa chỉ:</div>
             <div class="item-desc" id="address-show">Thái Hoà, Thái Thuỵ, Thái Bình</div>
           </div>
-          <div class="item item-target">
-            <div class="item-icon"><i class="bi bi-bullseye"></i></div>
-            <div class="item-name">Mục tiêu nghề nghiệp:</div>
-            <div class="item-desc" id="target-show">Đó là mục tiêu của tôi, tất cả những gì tôi muốn</div>
+          <div class="item">
+            <div class="topic-top" style="pointer-events: none">
+              <div class="topic-title">Mục tiêu nghề nghiệp</div>
+            </div>
+            <p id="target-show">Đó là mục tiêu của tôi, tất cả những gì tôi muốn</p>
           </div>
         </div>
       </div>
-      <div class="page-left">
-        <div class="page-bg1"></div>
-        <div class="page-bg2"></div>
+      <div class="page-right">
+        <div class="name">
+          <div class="last-name" id="last-name-show">Nguyễn</div>
+          <div class="first-name" id="first-name-show">Hoàng Lam</div>
+        </div>
+        <h3 class="job-title text-center" id="job-title-show">Full Stack Developer</h3>
+        <div id="data"></div>
+        <!-- Skill -->
+        <div class="topic">
+          <div class="topic-top" style="pointer-events: none">
+            <div class="topic-title">Kỹ năng</div>
+          </div>
+          <div id="skills-data"></div>
+        </div>
+        <!-- Skill -->
       </div>
-      <div class="page-right"></div>
       <div class="page-menu">
         <label class="item-icon choose-color primary-color" for="primary-color">
           <input
@@ -94,7 +106,7 @@
     <!-- Popup profile -->
     <div class="popup">
       <form class="edit-info" id="form-info">
-        <div class="edit-info-title"></div>
+        <!-- <div class="edit-info-title"></div> -->
         <div class="input-horizontal">
           <label for="name">Họ và tên: </label>
           <input type="text" id="name" />
@@ -112,16 +124,16 @@
           <input type="date" id="birthday" />
         </div>
         <div class="input-horizontal">
-          <label for="gender">Giới tính: </label>
-          <input type="text" id="gender" />
-        </div>
-        <div class="input-horizontal">
           <label for="address">Địa chỉ: </label>
           <input type="text" id="address" />
         </div>
         <div class="input-horizontal">
+          <label for="interests">Sở thích: </label>
+          <textarea name="" id="interests" cols="15" rows="10" style="height: 100px"></textarea>
+        </div>
+        <div class="input-horizontal">
           <label for="target">Mục tiêu nghề nghiệp: </label>
-          <textarea name="" id="target" cols="30" rows="10"></textarea>
+          <textarea name="" id="target" cols="15" rows="10" style="height: 100px"></textarea>
         </div>
         <div class="btn">
           <button type="submit">Update</button>
@@ -180,10 +192,31 @@
         </div>
       </form>
     </div>
+
+    <!-- Popup topic -->
+    <div class="popup">
+      <form action="" class="handle-category" id="handle-category" data-param="1" data-id="0">
+        <div class="input-vertical">
+          <label for="title">Tên catgory: </label>
+          <input type="text" id="category-title" />
+        </div>
+        <div class="input-vertical">
+          <label for="title">Các kỹ năng: </label>
+          <input type="text" id="category-skills" />
+        </div>
+        <div class="btn">
+          <button type="submit">Save</button>
+        </div>
+        <div class="icon-exit">
+          <i class="bi bi-x-lg"></i>
+        </div>
+      </form>
+    </div>
+
     <div class="popup-backdrop" style="display: none"></div>
     <div class="logo-fixed">
-      <a href="https://q5nguyenn.github.io/" class="logo-brand" target="_blank">
-        <img src="./images/q.png" alt="" class="img-square" />
+      <a href="hoanglam.azurewebsites.net" class="logo-brand" target="_blank">
+        <img src="./images/lam.png" alt="" class="img-square" />
       </a>
     </div>
     <div class="page-guide"></div>
@@ -192,5 +225,24 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="module" src="./js/main.js"></script>
   <script type="module" src="./js/data.js"></script>
+  <script type="module" src="./js/skill.js"></script>
   <!-- <script type="module" src="./js/ultility.js"></script> -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script>
+    const button = document.getElementById('download-button');
+
+    function generatePDF() {
+      // Choose the element that your content will be rendered to.
+      const element = document.getElementById('print-area');
+      // Choose the element and save the PDF for your user.
+      html2pdf().from(element).save();
+    }
+
+    button.addEventListener('click', generatePDF);
+  </script>
 </html>
