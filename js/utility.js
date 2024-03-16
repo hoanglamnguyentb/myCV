@@ -1,4 +1,4 @@
-export { setItem, getItem, generateNewId, formatDate, pageReload, debounce, replace, replaceChild };
+export { setItem, getItem, generateNewId, formatDate, pageReload, debounce, replace, replaceChild, objectifyForm };
 
 function setItem(item, value) {
   localStorage.setItem(item, JSON.stringify(value));
@@ -92,4 +92,13 @@ function replaceChild(array, index, position = 'up') {
   array[index] = array[replaceIndex];
   array[replaceIndex] = temp;
   return array;
+}
+
+function objectifyForm(formArray) {
+  //serialize data function
+  var returnArray = {};
+  for (var i = 0; i < formArray.length; i++) {
+    returnArray[formArray[i]['name']] = formArray[i]['value'];
+  }
+  return returnArray;
 }

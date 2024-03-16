@@ -18,6 +18,7 @@
 @media only print {
   .page {
     height: 100%;
+    margin-top: 0;
   }
 
   .page-front {

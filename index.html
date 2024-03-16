@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/customSweetalert2.css" />
     <link rel="stylesheet" href="./css/logo.css" />
-    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
   </head>
   <body>
-    <button id="download-button">Download as PDF</button>
     <div class="page" id="print-area">
+      <div class="overlay">
+        <img src="/images/overlay.png" alt="" />
+      </div>
       <div class="page-front">
         <div class="page-left">
           <div class="page-bg1"></div>
@@ -36,7 +37,7 @@
         </div>
         <!-- <div class="about" id="name-show">About me</div> -->
         <h3 class="text-center">About me</h3>
-        <p id="interests-show"></p>
+        <p id="interests-show" class="text-center"></p>
         <div class="contact">
           <div class="item">
             <div class="item-icon"><i class="bi bi-envelope"></i></div>
@@ -56,11 +57,11 @@
             <div class="item-icon"><i class="bi bi-geo"></i></div>
             <div class="item-desc" id="address-show">Thái Hoà, Thái Thuỵ, Thái Bình</div>
           </div>
-          <div class="item">
+          <div class="item" style="margin-top: 20px">
             <div class="topic-top" style="pointer-events: none">
               <div class="topic-title">Mục tiêu nghề nghiệp</div>
             </div>
-            <p id="target-show">Đó là mục tiêu của tôi, tất cả những gì tôi muốn</p>
+            <p id="target-show" class="text-center">Đó là mục tiêu của tôi, tất cả những gì tôi muốn</p>
           </div>
         </div>
       </div>
@@ -108,8 +109,16 @@
       <form class="edit-info" id="form-info">
         <!-- <div class="edit-info-title"></div> -->
         <div class="input-horizontal">
-          <label for="name">Họ và tên: </label>
-          <input type="text" id="name" />
+          <label for="name">Tên: </label>
+          <input type="text" id="first_name" />
+        </div>
+        <div class="input-horizontal">
+          <label for="name">Họ: </label>
+          <input type="text" id="last_name" />
+        </div>
+        <div class="input-horizontal">
+          <label for="name">Job Title: </label>
+          <input type="text" id="job_title" />
         </div>
         <div class="input-horizontal">
           <label for="email">Email: </label>
@@ -227,22 +236,4 @@
   <script type="module" src="./js/data.js"></script>
   <script type="module" src="./js/skill.js"></script>
   <!-- <script type="module" src="./js/ultility.js"></script> -->
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  ></script>
-  <script>
-    const button = document.getElementById('download-button');
-
-    function generatePDF() {
-      // Choose the element that your content will be rendered to.
-      const element = document.getElementById('print-area');
-      // Choose the element and save the PDF for your user.
-      html2pdf().from(element).save();
-    }
-
-    button.addEventListener('click', generatePDF);
-  </script>
 </html>

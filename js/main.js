@@ -1,4 +1,14 @@
-import { getItem, setItem, generateNewId, formatDate, pageReload, debounce, replace, replaceChild } from './utility.js';
+import {
+  getItem,
+  setItem,
+  generateNewId,
+  formatDate,
+  pageReload,
+  debounce,
+  replace,
+  replaceChild,
+  objectifyForm,
+} from './utility.js';
 import { user_reset, likes_reset, topics_reset, topic_childs_reset, colors_reset, resetData } from './data.js';
 
 $(document).ready(function () {
@@ -398,8 +408,10 @@ $(document).ready(function () {
   //3.1.1 Show popup
   $('.edit-content').click(function (e) {
     let user = getItem('user');
-    $('#name').focus();
-    $('#name').val(user['name']);
+    $('#first_name').focus();
+    $('#first_name').val(user['first_name']);
+    $('#last_name').val(user['last_name']);
+    $('#job_title').val(user['job_title']);
     $('#email').val(user['email']);
     $('#phone_number').val(user['phone_number']);
     $('#interests').val(user['interests']);
@@ -418,7 +430,9 @@ $(document).ready(function () {
   //3.1.2
   $('#form-info').submit(function (e) {
     let user = getItem('user');
-    let name = $('#name').val();
+    let first_name = $('#first_name').val();
+    let last_name = $('#last_name').val();
+    let job_title = $('#job_title').val();
     let email = $('#email').val();
     let phone_number = $('#phone_number').val();
     let interests = $('#interests').val();
@@ -426,7 +440,9 @@ $(document).ready(function () {
     let address = $('#address').val();
     let target = $('#target').val();
     let user_update = {
-      name: name,
+      first_name: first_name,
+      last_name: last_name,
+      job_title: job_title,
       avatar: user.avatar,
       email: email,
       phone_number: phone_number,
@@ -435,8 +451,9 @@ $(document).ready(function () {
       address: address,
       target: target,
     };
+    console.log(user_update);
     setItem('user', user_update);
-    showInfo();
+    // showInfo();
   });
 
   function showInfo() {
